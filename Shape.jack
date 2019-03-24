@@ -1,0 +1,32 @@
+class Shape {
+    field Square square;
+    field Long long;
+    field Array shapeMapArray;
+    field Array dimensions;
+
+    constructor Shape new(int shapeIndex) {
+        if(shapeIndex = 0) {
+            let square = Square.new();
+            let shapeMapArray = square.getShapeMapArray();
+            let dimensions = square.getDimensions();
+        }
+        if(shapeIndex = 1) {
+            let long = Long.new();
+            let shapeMapArray = long.getShapeMapArray();
+            let dimensions = long.getDimensions();
+        }
+        return this;
+    }
+
+    method int getWidth() {
+        return dimensions[0];
+    }
+
+    method int getHeight() {
+        return dimensions[1];
+    }
+
+    method String getShapeMap(int orientation) {
+        return shapeMapArray[orientation];
+    }
+}

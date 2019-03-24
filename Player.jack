@@ -1,0 +1,120 @@
+class Player {
+    field Shape currentShape;
+    field Drawer drawer;
+    field Array position;
+    field Array direction;
+    field int orientation;
+    
+    constructor Player new(int xPosition, int yPosition) {
+        let drawer = Drawer.new();
+        let currentShape = Shape.new(1);
+        do initializePosition(xPosition, yPosition);
+        do initializeDirection(0, 0);
+        do setCurrentOrientation(0);
+        do draw();
+        return this;
+    }
+
+    method void draw() {
+        do drawer.drawShape(currentShape.getShapeMap(orientation), getCurrentPosition());
+        return;
+    }
+
+    method void erase() {
+        do drawer.eraseShape(currentShape.getShapeMap(orientation), getCurrentPosition());
+        return;
+    }
+
+    method void run() {
+        var char key;
+        var int xDirection, yDirection;
+        var boolean exit;
+        let exit = false;
+        let xDirection = 0;
+        let yDirection = 0;
+        while (~exit) {
+            while(key = 0) {
+                let key = Keyboard.keyPressed();
+            }
+            if (key = 81) { let exit = true; } // q key
+            if (key = 90)  { do updateOrientation(); } // z key
+            if (key = 131) { let yDirection = -1; }   // up arrow
+            if (key = 133) { let yDirection = 1; }   // down arrow
+            if (key = 130) { let xDirection = -1; }   // left arrow
+            if (key = 132) { let xDirection = 1; }   // right arrow
+            do setCurrentDirection(xDirection, yDirection);
+            do move();
+            let xDirection = 0;
+            let yDirection = 0;
+            let key = 0;
+        }
+        return;
+    }
+
+    method void move() {
+        var int width, height, newX, newY;
+        let width = currentShape.getWidth();
+        let height = currentShape.getHeight();
+        let newX = position[0] + direction[0];
+        let newY = position[1] + direction[1];
+        if((~(newY < 0)) & (~(newY > (16 - height))) & (~(newX < 0)) & (~(newX > (32 - width)))) {
+            do draw();
+            do setCurrentPosition(newX, newY);
+            do erase();
+        }
+        do Sys.wait(15);
+        return;
+    }
+
+    method void initializePosition(int xPosition, int yPosition) {
+        let position = Array.new(2);
+        do setCurrentPosition(xPosition, yPosition);
+        return;
+    }
+
+    method void setCurrentPosition(int xPosition, int yPosition) {
+        let position[0] = xPosition;
+        let position[1] = yPosition;
+        return;
+    }
+
+    method Array getCurrentPosition() {
+        return position;
+    }
+
+    method void initializeDirection(int xDirection, int yDirection) {
+        let direction = Array.new(2);
+        do setCurrentDirection(xDirection, yDirection);
+        return;
+    }
+
+    method void setCurrentDirection(int xDirection, int yDirection) {
+        let direction[0] = xDirection;
+        let direction[1] = yDirection;
+        return;
+    }
+
+    method Array getCurrentDirection() {
+        return direction;
+    }
+
+    method void setCurrentOrientation(int zOrientation) {
+        let orientation = orientation;
+        return;
+    }
+
+    method int getCurrentOrientation() {
+        return orientation;
+    }
+
+    method void updateOrientation() {
+        do erase();
+        if(orientation = 3) {
+            let orientation = 0;
+        } else {
+            let orientation = orientation + 1;
+        }
+        do draw();
+        return;
+    }
+}

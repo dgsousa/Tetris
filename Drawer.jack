@@ -1,0 +1,51 @@
+
+class Drawer {
+    field int x;
+
+    constructor Drawer new() {
+        let x = 0;
+        return this;
+    }
+
+    method void drawBox(int x, int y, int color) {
+        var int start, counter, rowStart;
+        let start = 16384 + x + (512 * y);
+        let counter = 0;
+        while (counter < 16) {
+            let rowStart = (start + (32 * counter));
+            do Memory.poke(rowStart, color);
+            let counter = counter + 1;
+        }
+        return;
+    }
+
+    method void colorShape(String shapeMap, Array position, int color) {
+        var int row, column;
+        var char bitChar, isOne;
+        let isOne = 49;
+        let row = 0;
+        let column = 0;
+        while(column < 4) {
+            while(row < 4) {
+                let bitChar = shapeMap.charAt(((row * 4) + column));
+                if(bitChar = isOne) {
+                    do drawBox((position[0] + column), (position[1] + row), color);
+                }
+                let row = row + 1;
+            }
+            let row = 0;
+            let column = column + 1;
+        }
+        return;
+    }
+
+    method void drawShape(String shapeMap, Array position) {
+        do colorShape(shapeMap, position, -1);
+        return;
+    }
+
+    method void eraseShape(String shapeMap, Array position) {
+        do colorShape(shapeMap, position, 0);
+        return;
+    }
+}

@@ -1,0 +1,11 @@
+// Shape mapping
+// 0 -> Square
+
+class Main {
+    function void main() {
+        var Player player;
+        let player = Player.new(2, 2);
+        do player.run();
+        return;
+    }
+}

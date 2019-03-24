@@ -1,0 +1,34 @@
+class Square {
+    field Array shapeMapArray;
+    field Array dimensions;
+
+    constructor Square new() {
+        do setDimensions();
+        do setShapeMapArray();
+        return this;
+    }
+
+    method void setShapeMapArray() {
+        let shapeMapArray = Array.new(4);
+        let shapeMapArray[0] = "0000011001100000";
+        let shapeMapArray[1] = "0000011001100000";
+        let shapeMapArray[2] = "0000011001100000";
+        let shapeMapArray[3] = "0000011001100000";
+        return;
+    }
+
+    method Array getShapeMapArray() {
+        return shapeMapArray;
+    }
+
+    method void setDimensions() {
+        let dimensions = Array.new(2);
+        let dimensions[0] = 2;
+        let dimensions[1] = 2;
+        return;
+    }
+
+    method Array getDimensions() {
+        return dimensions;
+    }
+}
