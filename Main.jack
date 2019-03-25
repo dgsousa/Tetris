@@ -1,11 +1,23 @@
 // Shape mapping
 // 0 -> Square
+// 1 -> Long
 
 class Main {
     function void main() {
-        var Player player;
-        let player = Player.new(2, 2);
-        do player.run();
+        var Game game;
+        let game = Game.new(Main.getShapesArray());
+        do game.run();
         return;
+    }
+
+    function Array getShapesArray() {
+        var Array shapesArray;
+        let shapesArray = Array.new(5);
+        let shapesArray[0] = 0;
+        let shapesArray[1] = 1;
+        let shapesArray[2] = 2;
+        let shapesArray[3] = 1;
+        let shapesArray[4] = 1;
+        return shapesArray;
     }
 }

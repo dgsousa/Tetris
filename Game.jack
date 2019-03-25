@@ -1,0 +1,126 @@
+class Game {
+    field Board board;
+    field Shape currentShape;
+    field Array position, shapesArray;
+    field int orientation, shapesIndex;
+    
+    constructor Game new(Array gameShapesArray) {
+        let board = Board.new();
+        let shapesIndex = 0;
+        let shapesArray = gameShapesArray;
+        do initializeShape();
+        return this;
+    }
+
+    method void initializeShape() {
+        let currentShape = Shape.new(shapesArray[shapesIndex]);
+        do initializePosition(2, 2);
+        do setCurrentOrientation(0);
+        do draw();
+        let shapesIndex = shapesIndex + 1;
+        return;
+    }
+
+    method void draw() {
+        do Drawer.drawShape(currentShape.getShapeMap(), getCurrentPosition());
+        return;
+    }
+
+    method void erase() {
+        do Drawer.eraseShape(currentShape.getShapeMap(), getCurrentPosition());
+        return;
+    }
+
+    method void run() {
+        var char key;
+        var boolean exit;
+        let exit = false;
+        while (~exit) {
+            while(key = 0) {
+                let key = Keyboard.keyPressed();
+            }
+            if (key = 81) { let exit = true; } // q key
+            if (key = 90)  { do updateOrientation(); } // z key
+            if (key = 131) { do move(0, -1); } // up arrow
+            if (key = 133) { do move(0, 1); }  // down arrow
+            if (key = 130) { do move(-1, 0); } // left arrow
+            if (key = 132) { do move(1, 0); }  // right arrow
+            let key = 0;
+        }
+        return;
+    }
+
+    method void move(int x, int y) {
+        var int width, height, newX, newY;
+        var String offsetString;
+        var Array offset;
+        let width = currentShape.getWidth();
+        let height = currentShape.getHeight();
+        let offset = currentShape.getOffset();
+        let newX = position[0] + x;
+        let newY = position[1] + y;
+        if(
+            (~(newY < (-modulo(offset, 10)))) & // below top
+            (~(newY > ((16 - height) - modulo(offset, 10)))) & // above bottom
+            (~(newX < (-offset/10))) & // left of right edge
+            (~(newX > ((32 - width) - (offset/10)))) // right of left edge
+        ) {
+            do erase();
+            do setCurrentPosition(newX, newY);
+            do draw();
+        }
+        if(newY = ((16 - height) - modulo(offset, 10))) {
+            do erase();
+            do board.addShapeToBoard(currentShape.getShapeMap(), getCurrentPosition());
+
+            do initializeShape();
+        }
+        do Sys.wait(15);
+        return;
+    }
+
+    method void initializePosition(int xPosition, int yPosition) {
+        let position = Array.new(2);
+        do setCurrentPosition(xPosition, yPosition);
+        return;
+    }
+
+    method void setCurrentPosition(int xPosition, int yPosition) {
+        let position[0] = xPosition;
+        let position[1] = yPosition;
+        return;
+    }
+
+    method Array getCurrentPosition() {
+        return position;
+    }
+
+    method void setCurrentOrientation(int zOrientation) {
+        let orientation = orientation;
+        return;
+    }
+
+    method int getCurrentOrientation() {
+        return orientation;
+    }
+
+    method void updateOrientation() {
+        if(orientation = 3) {
+            let orientation = 0;
+        } else {
+            let orientation = orientation + 1;
+        }
+        do erase();
+        do currentShape.setOrientation(orientation);
+        do draw();
+        do Sys.wait(100);
+        return;
+    }
+
+    method int modulo(int num, int base) {
+        var int divisor, remainder;
+        let divisor = (num/base);
+        let remainder = num - (base * divisor);
+        return remainder;
+    }
+}

@@ -1,32 +1,67 @@
 class Shape {
     field Square square;
     field Long long;
-    field Array shapeMapArray;
-    field Array dimensions;
+    field RightHook rightHook;
+    field Array shapeMapArray, dimensionsArray, offsetArray, currentDimensions;
+    field String currentShapeMap;
+    field int currentOffset;
 
     constructor Shape new(int shapeIndex) {
+        do initializeFields();
         if(shapeIndex = 0) {
             let square = Square.new();
             let shapeMapArray = square.getShapeMapArray();
-            let dimensions = square.getDimensions();
+            let dimensionsArray = square.getDimensions();
+            let offsetArray = square.getOffsetArray();
         }
         if(shapeIndex = 1) {
             let long = Long.new();
             let shapeMapArray = long.getShapeMapArray();
-            let dimensions = long.getDimensions();
+            let dimensionsArray = long.getDimensions();
+            let offsetArray = long.getOffsetArray();
         }
+        if(shapeIndex = 2) {
+            let rightHook = RightHook.new();
+            let shapeMapArray = rightHook.getShapeMapArray();
+            let dimensionsArray = rightHook.getDimensions();
+            let offsetArray = rightHook.getOffsetArray();
+        }
+        do setOrientation(0);
         return this;
     }
 
+    method void initializeFields() {
+        let currentDimensions = Array.new(2);
+        return;
+    }
+
+    method void setOrientation(int orientation) {
+        let currentShapeMap = shapeMapArray[orientation];
+        let currentOffset = offsetArray[orientation];
+        if(~(orientation = 1) & ~(orientation = 3)) { // Because OR operator is broken ?
+            let currentDimensions[0] = dimensionsArray[0];
+            let currentDimensions[1] = dimensionsArray[1];
+        }
+        if(~(orientation = 0) & ~(orientation = 2)) { // Because OR operator is broken ?
+            let currentDimensions[0] = dimensionsArray[1];
+            let currentDimensions[1] = dimensionsArray[0];
+        }
+        return;
+    }
+
     method int getWidth() {
-        return dimensions[0];
+        return currentDimensions[0];
     }
 
     method int getHeight() {
-        return dimensions[1];
+        return currentDimensions[1];
     }
 
-    method String getShapeMap(int orientation) {
-        return shapeMapArray[orientation];
+    method String getShapeMap() {
+        return currentShapeMap;
+    }
+
+    method Array getOffset() {
+        return currentOffset;
     }
 }

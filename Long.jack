@@ -1,10 +1,10 @@
 class Long {
-    field Array shapeMapArray;
-    field Array dimensions;
+    field Array shapeMapArray, dimensions, offsetArray;
 
     constructor Long new() {
         do setDimensions();
         do setShapeMapArray();
+        do setOffsetArray();
         return this;
     }
 
@@ -23,12 +23,25 @@ class Long {
 
     method void setDimensions() {
         let dimensions = Array.new(2);
-        let dimensions[0] = 2;
-        let dimensions[1] = 2;
+        let dimensions[0] = 1;
+        let dimensions[1] = 4;
         return;
     }
 
     method Array getDimensions() {
         return dimensions;
+    }
+
+    method void setOffsetArray() {
+        let offsetArray = Array.new(4);
+        let offsetArray[0] = 10;
+        let offsetArray[1] = 1;
+        let offsetArray[2] = 10;
+        let offsetArray[3] = 1;
+        return;
+    }
+
+    method Array getOffsetArray() {
+        return offsetArray;
     }
 }

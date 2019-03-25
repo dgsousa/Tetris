@@ -7,7 +7,7 @@ class Drawer {
         return this;
     }
 
-    method void drawBox(int x, int y, int color) {
+    function void drawBox(int x, int y, int color) {
         var int start, counter, rowStart;
         let start = 16384 + x + (512 * y);
         let counter = 0;
@@ -19,33 +19,33 @@ class Drawer {
         return;
     }
 
-    method void colorShape(String shapeMap, Array position, int color) {
+    function void colorShape(String shapeMap, Array position, int color) {
         var int row, column;
         var char bitChar, isOne;
         let isOne = 49;
         let row = 0;
         let column = 0;
-        while(column < 4) {
-            while(row < 4) {
+        while(row < 4) {
+            while(column < 4) {
                 let bitChar = shapeMap.charAt(((row * 4) + column));
                 if(bitChar = isOne) {
-                    do drawBox((position[0] + column), (position[1] + row), color);
+                    do Drawer.drawBox((position[0] + column), (position[1] + row), color);
                 }
-                let row = row + 1;
+                let column = column + 1;
             }
-            let row = 0;
-            let column = column + 1;
+            let column = 0;
+            let row = row + 1;
         }
         return;
     }
 
-    method void drawShape(String shapeMap, Array position) {
-        do colorShape(shapeMap, position, -1);
+    function void drawShape(String shapeMap, Array position) {
+        do Drawer.colorShape(shapeMap, position, -1);
         return;
     }
 
-    method void eraseShape(String shapeMap, Array position) {
-        do colorShape(shapeMap, position, 0);
+    function void eraseShape(String shapeMap, Array position) {
+        do Drawer.colorShape(shapeMap, position, 0);
         return;
     }
 }

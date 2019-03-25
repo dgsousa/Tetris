@@ -1,0 +1,71 @@
+class Board {
+    field Array occupiedSquares;
+
+    constructor Board new() {
+        do initializeBoard();
+        return this;
+    }
+
+    method void initializeBoard() {
+        var int counter;
+        var Array newRow;
+        let counter = 0;
+        let occupiedSquares = Array.new(16);
+        while(counter < 16) {
+            let occupiedSquares[counter] = "00000000000000000000000000000000";
+            let counter = counter + 1;
+        }
+        return;
+    }
+
+    method void addShapeToBoard(String shapeMap, Array position) {
+        var int row, column;
+        var char bitChar, isOne;
+        let isOne = 49;
+        while(row < 4) {
+            while(column < 4) {
+                let bitChar = shapeMap.charAt(((row * 4) + column));
+                if(bitChar = isOne) {
+                    do updateBoardSquare((position[0] + column), (position[1] + row));
+                }
+                let column = column + 1;
+            }
+            let column = 0;
+            let row = row + 1;
+        }
+        return;
+    }
+
+    method void updateBoardSquare(int xPos, int yPos) {
+        var String currentRow;
+        var char one;
+        let one = 49;
+        let currentRow = occupiedSquares[yPos];
+        do currentRow.setCharAt(xPos, one);
+        let occupiedSquares[yPos] = currentRow;
+        do Drawer.drawBox(xPos, yPos, -1);
+        return;
+    }
+
+    // method void drawBoard() {
+    //     var String currentRow;
+    //     var int row, column;
+    //     var char bitChar, isOne;
+    //     let isOne = 49;
+    //     let row = 0;
+    //     let column = 0;
+    //     while(row < 16) {
+    //         let currentRow = occupiedSquares[row];
+    //         while(column < 32) {
+    //             let bitChar = currentRow.charAt(column);
+    //             if(bitChar = isOne) {
+    //                 do Drawer.drawBox(column, row, -1);
+    //             }
+    //             let column = column + 1;
+    //         }
+    //         let column = 0;
+    //         let row = row + 1;
+    //     }
+    //     return;
+    // }
+}

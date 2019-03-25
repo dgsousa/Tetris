@@ -1,7 +1,7 @@
-class Square {
+class RightHook {
     field Array shapeMapArray, dimensions, offsetArray;
 
-    constructor Square new() {
+    constructor RightHook new() {
         do setDimensions();
         do setShapeMapArray();
         do setOffsetArray();
@@ -10,10 +10,10 @@ class Square {
 
     method void setShapeMapArray() {
         let shapeMapArray = Array.new(4);
-        let shapeMapArray[0] = "0000011001100000";
-        let shapeMapArray[1] = "0000011001100000";
-        let shapeMapArray[2] = "0000011001100000";
-        let shapeMapArray[3] = "0000011001100000";
+        let shapeMapArray[0] = "0000001011100000";
+        let shapeMapArray[1] = "1000100011000000";
+        let shapeMapArray[2] = "1110100000000000";
+        let shapeMapArray[3] = "0110001000100000";
         return;
     }
 
@@ -23,7 +23,7 @@ class Square {
 
     method void setDimensions() {
         let dimensions = Array.new(2);
-        let dimensions[0] = 2;
+        let dimensions[0] = 3;
         let dimensions[1] = 2;
         return;
     }
@@ -34,10 +34,10 @@ class Square {
 
     method void setOffsetArray() {
         let offsetArray = Array.new(4);
-        let offsetArray[0] = 11;
-        let offsetArray[1] = 11;
-        let offsetArray[2] = 11;
-        let offsetArray[3] = 11;
+        let offsetArray[0] = 1;
+        let offsetArray[1] = 0;
+        let offsetArray[2] = 0;
+        let offsetArray[3] = 10;
         return;
     }
 
