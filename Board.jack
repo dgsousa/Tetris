@@ -72,7 +72,7 @@ class Board {
         return false;
     }
 
-    method Boolean wouldOverlap(String shapeMap, int newX, int newY) {
+    method Boolean spaceIsFree(String shapeMap, int newX, int newY) {
         var int row, column;
         var String boardRow;
         var char bitChar, boardChar;
@@ -80,28 +80,12 @@ class Board {
             while(column < 4) {
                 let bitChar = shapeMap.charAt(((row * 4) + column));
                 if(bitChar = isOne) {
+                    if(~(isInBounds((column + newX), (row + newY)))) {
+                        return false;
+                    }
                     let boardRow = allSquares[(newY + row)];
                     let boardChar = boardRow.charAt(newX + column);
                     if(boardChar = isOne) {
-                        return true;
-                    }
-                }
-                let column = column + 1;
-            }
-            let column = 0;
-            let row = row + 1;
-        }
-        return false;
-    }
-
-    method Boolean shapeIsInBounds(String shapeMap, int newX, int newY) {
-        var int row, column;
-        var char bitChar, boardChar;
-        while(row < 4) {
-            while(column < 4) {
-                let bitChar = shapeMap.charAt(((row * 4) + column));
-                if(bitChar = isOne) {
-                    if(~(isInBounds((column + newX), (row + newY)))) {
                         return false;
                     }
                 }
@@ -115,30 +99,6 @@ class Board {
 
     method Boolean isInBounds(int x, int y) {
         return ((~(x < 0)) & (~(x > 31)) & (~(y < 0)) & (~(y > 14)));
-    }
-
-    method Boolean canRotate(String shapeMap, Array position) {
-        var int xPos, yPos, row, column;
-        var String boardRow;
-        var char bitChar, boardChar;
-        let xPos = position[0];
-        let yPos = position[1];
-        while(row < 4) {
-            while(column < 4) {
-                let bitChar = shapeMap.charAt(((row * 4) + column));
-                if(bitChar = isOne) {
-                    let boardRow = allSquares[(yPos + row)];
-                    let boardChar = boardRow.charAt(xPos + column);
-                    if((~isInBounds((xPos + column), (yPos + row))) | boardChar = isOne) {
-                        return false;
-                    }
-                }
-                let column = column + 1;
-            }
-            let column = 0;
-            let row = row + 1;
-        }
-        return true;
     }
 
     method Boolean shapeIsAtFloor(String shapeMap, int newX, int newY) {

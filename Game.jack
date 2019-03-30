@@ -46,17 +46,15 @@ class Game {
         let position = getPosition();
         let newX = position[0] + x;
         let newY = position[1] + y;
-        if(board.shapeIsInBounds(shapeMap, newX, newY)) {
-            if (~(board.wouldOverlap(shapeMap, newX, newY))) { // prevents overlapping
-                if(board.isInContactAbove(shapeMap, newX, newY)) {
-                    do erase();
-                    do board.addShapeToBoard(shapeMap, newX, newY);
-                    do setNewShape();
-                } else {
-                    do erase();
-                    do setPosition(newX, newY);
-                    do draw();
-                }
+        if(board.spaceIsFree(shapeMap, newX, newY)) { // prevents overlapping
+            if(board.isInContactAbove(shapeMap, newX, newY)) {
+                do erase();
+                do board.addShapeToBoard(shapeMap, newX, newY);
+                do setNewShape();
+            } else {
+                do erase();
+                do setPosition(newX, newY);
+                do draw();
             }
         } else {
             if(board.shapeIsAtFloor(shapeMap, newX, newY)) {
@@ -80,8 +78,8 @@ class Game {
         } else {
             let newOrientation = orientation + 1;
         }
-        let shapeMap = getShapeMap();
-        if(board.canRotate(shapeMap, position)) {
+        let shapeMap = player.getShapeMap(newOrientation);
+        if(board.spaceIsFree(shapeMap, position[0], position[1])) {
             do erase();
             do setOrientation(newOrientation);
             do draw();
