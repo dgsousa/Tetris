@@ -5,20 +5,9 @@ class Player {
 
     constructor Player new() {
         let position = Array.new(2);
-        do setPosition(0, 0);
-        let shapesIndex = 0;
+        let shapesIndex = -1;
         do initializeShapesArray();
-        do setOrientation(0);
-        let shape = Shape.new(shapesArray[shapesIndex]);
         return this;
-    }
-
-    method void getNewShape() {
-        do setPosition(0, 0);
-        do setOrientation(0);
-        let shapesIndex = shapesIndex + 1;
-        let shape = Shape.new(shapesArray[shapesIndex]);
-        return;
     }
 
     method void initializeShapesArray() {
@@ -55,6 +44,9 @@ class Player {
     }
 
     method void setNewShape() {
+        let position[0] = 0;
+        let position[1] = 0;
+        let orientation = 0;
         let shapesIndex = shapesIndex + 1;
         let shape = Shape.new(shapesArray[shapesIndex]);
         return;

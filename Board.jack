@@ -22,7 +22,7 @@ class Board {
 
     method void addShapeToBoard(String shapeMap, int newX, int newY) {
         var int row, column;
-        var char bitChar, isOne;
+        var char bitChar;
         while(row < 4) {
             while(column < 4) {
                 let bitChar = shapeMap.charAt(((row * 4) + column));
@@ -51,7 +51,7 @@ class Board {
     method Boolean isInContactAbove(String shapeMap, int newX, int newY) {
         var int row, column;
         var String boardRow;
-        var char bitChar, boardChar, isOne;
+        var char bitChar, boardChar;
         while(row < 4) {
             while(column < 4) {
                 let bitChar = shapeMap.charAt(((row * 4) + column));
@@ -75,7 +75,7 @@ class Board {
     method Boolean wouldOverlap(String shapeMap, int newX, int newY) {
         var int row, column;
         var String boardRow;
-        var char bitChar, boardChar, isOne;
+        var char bitChar, boardChar;
         while(row < 4) {
             while(column < 4) {
                 let bitChar = shapeMap.charAt(((row * 4) + column));
@@ -114,13 +114,13 @@ class Board {
     }
 
     method Boolean isInBounds(int x, int y) {
-        return ((~(x < 0)) & (~(x > 31)) & (~(y < 0)) & (~(y > 15)));
+        return ((~(x < 0)) & (~(x > 31)) & (~(y < 0)) & (~(y > 14)));
     }
 
     method Boolean canRotate(String shapeMap, Array position) {
         var int xPos, yPos, row, column;
         var String boardRow;
-        var char bitChar, boardChar, isOne;
+        var char bitChar, boardChar;
         let xPos = position[0];
         let yPos = position[1];
         while(row < 4) {
@@ -143,12 +143,12 @@ class Board {
 
     method Boolean shapeIsAtFloor(String shapeMap, int newX, int newY) {
         var int row, column;
-        var char bitChar, boardChar, isOne;
+        var char bitChar, boardChar;
         while(row < 4) {
             while(column < 4) {
                 let bitChar = shapeMap.charAt(((row * 4) + column));
                 if(bitChar = isOne) {
-                    if(newY = 16) {
+                    if((newY + row) = 15) {
                         return true;
                     }
                 }

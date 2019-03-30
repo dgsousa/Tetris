@@ -104,7 +104,7 @@ goto WHILE_EXP0
 label WHILE_END0
 push constant 0
 return
-function Board.addShapeToBoard 4
+function Board.addShapeToBoard 3
 push argument 0
 pop pointer 0
 label WHILE_EXP0
@@ -128,7 +128,7 @@ add
 call String.charAt 2
 pop local 2
 push local 2
-push local 3
+push this 0
 eq
 if-goto IF_TRUE0
 goto IF_FALSE0
@@ -191,7 +191,7 @@ call Drawer.drawBox 3
 pop temp 0
 push constant 0
 return
-function Board.isInContactAbove 6
+function Board.isInContactAbove 5
 push argument 0
 pop pointer 0
 label WHILE_EXP0
@@ -215,7 +215,7 @@ add
 call String.charAt 2
 pop local 3
 push local 3
-push local 5
+push this 0
 eq
 if-goto IF_TRUE0
 goto IF_FALSE0
@@ -245,7 +245,7 @@ add
 call String.charAt 2
 pop local 4
 push local 4
-push local 5
+push this 0
 eq
 if-goto IF_TRUE2
 goto IF_FALSE2
@@ -272,7 +272,7 @@ goto WHILE_EXP0
 label WHILE_END0
 push constant 0
 return
-function Board.wouldOverlap 6
+function Board.wouldOverlap 5
 push argument 0
 pop pointer 0
 label WHILE_EXP0
@@ -296,7 +296,7 @@ add
 call String.charAt 2
 pop local 3
 push local 3
-push local 5
+push this 0
 eq
 if-goto IF_TRUE0
 goto IF_FALSE0
@@ -316,7 +316,7 @@ add
 call String.charAt 2
 pop local 4
 push local 4
-push local 5
+push this 0
 eq
 if-goto IF_TRUE1
 goto IF_FALSE1
@@ -422,12 +422,12 @@ lt
 not
 and
 push argument 2
-push constant 15
+push constant 14
 gt
 not
 and
 return
-function Board.canRotate 8
+function Board.canRotate 7
 push argument 0
 pop pointer 0
 push constant 0
@@ -463,7 +463,7 @@ add
 call String.charAt 2
 pop local 5
 push local 5
-push local 7
+push this 0
 eq
 if-goto IF_TRUE0
 goto IF_FALSE0
@@ -493,7 +493,7 @@ call Board.isInBounds 3
 not
 push local 6
 or
-push local 7
+push this 0
 eq
 if-goto IF_TRUE1
 goto IF_FALSE1
@@ -519,7 +519,7 @@ label WHILE_END0
 push constant 0
 not
 return
-function Board.shapeIsAtFloor 5
+function Board.shapeIsAtFloor 4
 push argument 0
 pop pointer 0
 label WHILE_EXP0
@@ -543,13 +543,15 @@ add
 call String.charAt 2
 pop local 2
 push local 2
-push local 4
+push this 0
 eq
 if-goto IF_TRUE0
 goto IF_FALSE0
 label IF_TRUE0
 push argument 3
-push constant 16
+push local 0
+add
+push constant 15
 eq
 if-goto IF_TRUE1
 goto IF_FALSE1

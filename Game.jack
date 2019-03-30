@@ -5,7 +5,7 @@ class Game {
     constructor Game new() {
         let board = Board.new();
         let player = Player.new();
-        do draw();
+        do setNewShape();
         return this;
     }
 
@@ -59,7 +59,6 @@ class Game {
                 }
             }
         } else {
-            do Output.printString("test");
             if(board.shapeIsAtFloor(shapeMap, newX, newY)) {
                 do erase();
                 do board.addShapeToBoard(shapeMap, newX, newY);
@@ -115,6 +114,7 @@ class Game {
 
     method void setNewShape() {
         do player.setNewShape();
+        do draw();
         return;
     }
 }
