@@ -1,10 +1,7 @@
 function Shape.new 0
-push constant 9
+push constant 4
 call Memory.alloc 1
 pop pointer 0
-push pointer 0
-call Shape.initializeFields 1
-pop temp 0
 push argument 0
 push constant 0
 eq
@@ -16,12 +13,6 @@ pop this 0
 push this 0
 call Square.getShapeMapArray 1
 pop this 3
-push this 0
-call Square.getDimensions 1
-pop this 4
-push this 0
-call Square.getOffsetArray 1
-pop this 5
 label IF_FALSE0
 push argument 0
 push constant 1
@@ -34,12 +25,6 @@ pop this 1
 push this 1
 call Long.getShapeMapArray 1
 pop this 3
-push this 1
-call Long.getDimensions 1
-pop this 4
-push this 1
-call Long.getOffsetArray 1
-pop this 5
 label IF_FALSE1
 push argument 0
 push constant 2
@@ -52,152 +37,15 @@ pop this 2
 push this 2
 call RightHook.getShapeMapArray 1
 pop this 3
-push this 2
-call RightHook.getDimensions 1
-pop this 4
-push this 2
-call RightHook.getOffsetArray 1
-pop this 5
 label IF_FALSE2
 push pointer 0
-push constant 0
-call Shape.setOrientation 2
-pop temp 0
-push pointer 0
-return
-function Shape.initializeFields 0
-push argument 0
-pop pointer 0
-push constant 2
-call Array.new 1
-pop this 6
-push constant 0
-return
-function Shape.setOrientation 0
-push argument 0
-pop pointer 0
-push argument 1
-push this 3
-add
-pop pointer 1
-push that 0
-pop this 7
-push argument 1
-push this 5
-add
-pop pointer 1
-push that 0
-pop this 8
-push argument 1
-push constant 1
-eq
-not
-push argument 1
-push constant 3
-eq
-not
-and
-if-goto IF_TRUE0
-goto IF_FALSE0
-label IF_TRUE0
-push constant 0
-push this 6
-add
-push constant 0
-push this 4
-add
-pop pointer 1
-push that 0
-pop temp 0
-pop pointer 1
-push temp 0
-pop that 0
-push constant 1
-push this 6
-add
-push constant 1
-push this 4
-add
-pop pointer 1
-push that 0
-pop temp 0
-pop pointer 1
-push temp 0
-pop that 0
-label IF_FALSE0
-push argument 1
-push constant 0
-eq
-not
-push argument 1
-push constant 2
-eq
-not
-and
-if-goto IF_TRUE1
-goto IF_FALSE1
-label IF_TRUE1
-push constant 0
-push this 6
-add
-push constant 1
-push this 4
-add
-pop pointer 1
-push that 0
-pop temp 0
-pop pointer 1
-push temp 0
-pop that 0
-push constant 1
-push this 6
-add
-push constant 0
-push this 4
-add
-pop pointer 1
-push that 0
-pop temp 0
-pop pointer 1
-push temp 0
-pop that 0
-label IF_FALSE1
-push constant 0
-return
-function Shape.getWidth 0
-push argument 0
-pop pointer 0
-push constant 0
-push this 6
-add
-pop pointer 1
-push that 0
-return
-function Shape.getHeight 0
-push argument 0
-pop pointer 0
-push constant 1
-push this 6
-add
-pop pointer 1
-push that 0
 return
 function Shape.getShapeMap 0
 push argument 0
 pop pointer 0
-push this 7
-return
-function Shape.getShapeMapByIndex 0
-push argument 0
-pop pointer 0
 push argument 1
 push this 3
 add
 pop pointer 1
 push that 0
-return
-function Shape.getOffset 0
-push argument 0
-pop pointer 0
-push this 8
 return

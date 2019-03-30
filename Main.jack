@@ -5,19 +5,8 @@
 class Main {
     function void main() {
         var Game game;
-        let game = Game.new(Main.getShapesArray());
+        let game = Game.new();
         do game.run();
         return;
-    }
-
-    function Array getShapesArray() {
-        var Array shapesArray;
-        let shapesArray = Array.new(5);
-        let shapesArray[0] = 0;
-        let shapesArray[1] = 1;
-        let shapesArray[2] = 2;
-        let shapesArray[3] = 1;
-        let shapesArray[4] = 1;
-        return shapesArray;
     }
 }

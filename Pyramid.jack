@@ -2,9 +2,7 @@ class Pyramid {
     field Array shapeMapArray, dimensions, offsetArray;
 
     constructor Pyramid new() {
-        do setDimensions();
         do setShapeMapArray();
-        do setOffsetArray();
         return this;
     }
 
@@ -19,29 +17,5 @@ class Pyramid {
 
     method Array getShapeMapArray() {
         return shapeMapArray;
-    }
-
-    method void setDimensions() {
-        let dimensions = Array.new(2);
-        let dimensions[0] = 3;
-        let dimensions[1] = 2;
-        return;
-    }
-
-    method Array getDimensions() {
-        return dimensions;
-    }
-
-    method void setOffsetArray() {
-        let offsetArray = Array.new(4);
-        let offsetArray[0] = 0;
-        let offsetArray[1] = 10;
-        let offsetArray[2] = 1;
-        let offsetArray[3] = 0;
-        return;
-    }
-
-    method Array getOffsetArray() {
-        return offsetArray;
     }
 }

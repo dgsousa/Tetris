@@ -1,32 +1,21 @@
 class Game {
     field Board board;
-    field Shape currentShape;
-    field Array position, shapesArray;
-    field int orientation, shapesIndex;
+    field Player player;
     
-    constructor Game new(Array gameShapesArray) {
+    constructor Game new() {
         let board = Board.new();
-        let shapesIndex = 0;
-        let shapesArray = gameShapesArray;
-        do initializeShape();
+        let player = Player.new();
+        do draw();
         return this;
     }
 
-    method void initializeShape() {
-        let currentShape = Shape.new(shapesArray[shapesIndex]);
-        do initializePosition(0, 0);
-        do draw();
-        let shapesIndex = shapesIndex + 1;
-        return;
-    }
-
     method void draw() {
-        do Drawer.drawShape(currentShape.getShapeMap(), getCurrentPosition());
+        do Drawer.drawShape(getShapeMap(), getPosition());
         return;
     }
 
     method void erase() {
-        do Drawer.eraseShape(currentShape.getShapeMap(), getCurrentPosition());
+        do Drawer.eraseShape(getShapeMap(), getPosition());
         return;
     }
 
@@ -50,81 +39,82 @@ class Game {
     }
 
     method void move(int x, int y) {
-        var int width, height, newX, newY;
-        var String offsetString;
-        var Array offset;
-        let width = currentShape.getWidth();
-        let height = currentShape.getHeight();
-        let offset = currentShape.getOffset();
+        var int newX, newY;
+        var String shapeMap;
+        var Array position;
+        let shapeMap = getShapeMap();
+        let position = getPosition();
         let newX = position[0] + x;
         let newY = position[1] + y;
-        if( // Checks to make sure the shape is in bounds
-            (~((newY + modulo(offset, 10)) < 0)) & // below top
-            (~((newY + height + modulo(offset, 10)) > 15)) & // above bottom
-            (~((newX + (offset/10)) < 0)) & // left of right edge
-            (~((newX + width + (offset/10)) > 32)) // right of left edge
-        ) {
-            if (~(board.wouldOverlap(currentShape.getShapeMap(), newX, newY))) { // prevents overlapping
-                if(board.isInContactAbove(currentShape.getShapeMap(), newX, newY)) {
+        if(board.shapeIsInBounds(shapeMap, newX, newY)) {
+            if (~(board.wouldOverlap(shapeMap, newX, newY))) { // prevents overlapping
+                if(board.isInContactAbove(shapeMap, newX, newY)) {
                     do erase();
-                    do board.addShapeToBoard(currentShape.getShapeMap(), newX, newY);
-                    do initializeShape();
+                    do board.addShapeToBoard(shapeMap, newX, newY);
+                    do setNewShape();
                 } else {
                     do erase();
-                    do setCurrentPosition(newX, newY);
+                    do setPosition(newX, newY);
                     do draw();
                 }
             }
         } else {
-            if((newY + height + modulo(offset, 10)) = 16) {
+            do Output.printString("test");
+            if(board.shapeIsAtFloor(shapeMap, newX, newY)) {
                 do erase();
-                do board.addShapeToBoard(currentShape.getShapeMap(), newX, newY);
-                do initializeShape();
+                do board.addShapeToBoard(shapeMap, newX, newY);
+                do setNewShape();
             }
         }
         do Sys.wait(200);
         return;
     }
 
-    method void initializePosition(int xPosition, int yPosition) {
-        let position = Array.new(2);
-        do setCurrentPosition(xPosition, yPosition);
-        return;
-    }
-
-    method void setCurrentPosition(int xPosition, int yPosition) {
-        let position[0] = xPosition;
-        let position[1] = yPosition;
-        return;
-    }
-
-    method Array getCurrentPosition() {
-        return position;
-    }
-
     method void rotate() {
         var String shapeMap;
-        var int newOrientation, currentOrientation;
+        var Array position;
+        var int newOrientation, orientation;
+        let position = getPosition();
+        let orientation = getOrientation();
         if(orientation = 3) {
             let newOrientation = 0;
         } else {
             let newOrientation = orientation + 1;
         }
-        let shapeMap = currentShape.getShapeMapByIndex(newOrientation);
+        let shapeMap = getShapeMap();
         if(board.canRotate(shapeMap, position)) {
-            do Output.printInt(newOrientation);
             do erase();
-            do currentShape.setOrientation(newOrientation);
+            do setOrientation(newOrientation);
             do draw();
             do Sys.wait(200);
         }
         return;
     }
 
-    method int modulo(int num, int base) {
-        var int divisor, remainder;
-        let divisor = (num/base);
-        let remainder = num - (base * divisor);
-        return remainder;
+    method String getShapeMap() {
+        return player.getShapeMap(player.getOrientation());
+    }
+
+    method void setPosition(int newX, int newY) {
+        do player.setPosition(newX, newY);
+        return;
+    }
+
+    method Array getPosition() {
+        return player.getPosition();
+    }
+
+    method int getOrientation() {
+        return player.getOrientation();
+    }
+
+    method void setOrientation(int orientation) {
+        do player.setOrientation(orientation);
+        return;
+    }
+
+    method void setNewShape() {
+        do player.setNewShape();
+        return;
     }
 }

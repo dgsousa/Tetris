@@ -2,12 +2,9 @@ class Shape {
     field Square square;
     field Long long;
     field RightHook rightHook;
-    field Array shapeMapArray, dimensionsArray;
-    field String currentShapeMap;
-    field int orientation;
+    field Array shapeMapArray;
 
     constructor Shape new(int shapeIndex) {
-        do initializeFields();
         if(shapeIndex = 0) {
             let square = Square.new();
             let shapeMapArray = square.getShapeMapArray();
@@ -20,34 +17,10 @@ class Shape {
             let rightHook = RightHook.new();
             let shapeMapArray = rightHook.getShapeMapArray();
         }
-        do setOrientation(0);
         return this;
     }
 
-    method void initializeFields() {
-        let currentDimensions = Array.new(2);
-        return;
-    }
-
-    method void setOrientation(int orientation) {
-        let currentShapeMap = shapeMapArray[orientation];
-        let currentOffset = offsetArray[orientation];
-        if(~(orientation = 1) & ~(orientation = 3)) { // Because OR operator is broken ?
-            let currentDimensions[0] = dimensionsArray[0];
-            let currentDimensions[1] = dimensionsArray[1];
-        }
-        if(~(orientation = 0) & ~(orientation = 2)) { // Because OR operator is broken ?
-            let currentDimensions[0] = dimensionsArray[1];
-            let currentDimensions[1] = dimensionsArray[0];
-        }
-        return;
-    }
-
-    method String getShapeMap() {
-        return currentShapeMap;
-    }
-
-    method Array getShapeMapByIndex(int index) {
-        return shapeMapArray[index];
+    method Array getShapeMap(int orientation) {
+        return shapeMapArray[orientation];
     }
 }

@@ -1,10 +1,8 @@
 class RightHook {
-    field Array shapeMapArray, dimensions, offsetArray;
+    field Array shapeMapArray;
 
     constructor RightHook new() {
-        do setDimensions();
         do setShapeMapArray();
-        do setOffsetArray();
         return this;
     }
 
@@ -19,29 +17,5 @@ class RightHook {
 
     method Array getShapeMapArray() {
         return shapeMapArray;
-    }
-
-    method void setDimensions() {
-        let dimensions = Array.new(2);
-        let dimensions[0] = 3;
-        let dimensions[1] = 2;
-        return;
-    }
-
-    method Array getDimensions() {
-        return dimensions;
-    }
-
-    method void setOffsetArray() {
-        let offsetArray = Array.new(4);
-        let offsetArray[0] = 1;
-        let offsetArray[1] = 0;
-        let offsetArray[2] = 0;
-        let offsetArray[3] = 10;
-        return;
-    }
-
-    method Array getOffsetArray() {
-        return offsetArray;
     }
 }

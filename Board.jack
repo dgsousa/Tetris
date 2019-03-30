@@ -1,7 +1,9 @@
 class Board {
+    field char isOne;
     field Array allSquares;
 
     constructor Board new() {
+        let isOne = 49;
         do initializeBoard();
         return this;
     }
@@ -21,7 +23,6 @@ class Board {
     method void addShapeToBoard(String shapeMap, int newX, int newY) {
         var int row, column;
         var char bitChar, isOne;
-        let isOne = 49;
         while(row < 4) {
             while(column < 4) {
                 let bitChar = shapeMap.charAt(((row * 4) + column));
@@ -51,7 +52,6 @@ class Board {
         var int row, column;
         var String boardRow;
         var char bitChar, boardChar, isOne;
-        let isOne = 49;
         while(row < 4) {
             while(column < 4) {
                 let bitChar = shapeMap.charAt(((row * 4) + column));
@@ -76,7 +76,6 @@ class Board {
         var int row, column;
         var String boardRow;
         var char bitChar, boardChar, isOne;
-        let isOne = 49;
         while(row < 4) {
             while(column < 4) {
                 let bitChar = shapeMap.charAt(((row * 4) + column));
@@ -95,28 +94,14 @@ class Board {
         return false;
     }
 
-    method Boolean isInBounds(int x, int y) {
-        do Output.printString("test4");
-        return ((~(x < 0)) & (~(x > 15)) & (~(y < 0)) & (~(y > 32)));
-    }
-
-    method Boolean canRotate(String shapeMap, Array position) {
-        var int xPos, yPos, row, column;
-        var String boardRow;
-        var char bitChar, boardChar, isOne;
-        let xPos = position[0];
-        let yPos = position[1];
-        let isOne = 49;
-        do Output.printString("test1");
+    method Boolean shapeIsInBounds(String shapeMap, int newX, int newY) {
+        var int row, column;
+        var char bitChar, boardChar;
         while(row < 4) {
             while(column < 4) {
                 let bitChar = shapeMap.charAt(((row * 4) + column));
                 if(bitChar = isOne) {
-                    do Output.printString("test2");
-                    let boardRow = allSquares[(yPos + row)];
-                    let boardChar = boardRow.charAt(xPos + column);
-                    if((~isInBounds((xPos + column), (yPos + row))) | boardChar = isOne) {
-                        do Output.printString("test3");
+                    if(~(isInBounds((column + newX), (row + newY)))) {
                         return false;
                     }
                 }
@@ -125,7 +110,53 @@ class Board {
             let column = 0;
             let row = row + 1;
         }
-        do Output.printString("test5");
         return true;
+    }
+
+    method Boolean isInBounds(int x, int y) {
+        return ((~(x < 0)) & (~(x > 31)) & (~(y < 0)) & (~(y > 15)));
+    }
+
+    method Boolean canRotate(String shapeMap, Array position) {
+        var int xPos, yPos, row, column;
+        var String boardRow;
+        var char bitChar, boardChar, isOne;
+        let xPos = position[0];
+        let yPos = position[1];
+        while(row < 4) {
+            while(column < 4) {
+                let bitChar = shapeMap.charAt(((row * 4) + column));
+                if(bitChar = isOne) {
+                    let boardRow = allSquares[(yPos + row)];
+                    let boardChar = boardRow.charAt(xPos + column);
+                    if((~isInBounds((xPos + column), (yPos + row))) | boardChar = isOne) {
+                        return false;
+                    }
+                }
+                let column = column + 1;
+            }
+            let column = 0;
+            let row = row + 1;
+        }
+        return true;
+    }
+
+    method Boolean shapeIsAtFloor(String shapeMap, int newX, int newY) {
+        var int row, column;
+        var char bitChar, boardChar, isOne;
+        while(row < 4) {
+            while(column < 4) {
+                let bitChar = shapeMap.charAt(((row * 4) + column));
+                if(bitChar = isOne) {
+                    if(newY = 16) {
+                        return true;
+                    }
+                }
+                let column = column + 1;
+            }
+            let column = 0;
+            let row = row + 1;
+        }
+        return false;
     }
 }

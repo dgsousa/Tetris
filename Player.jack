@@ -1,0 +1,62 @@
+class Player {
+    field Shape shape;
+    field Array position, shapesArray;
+    field int orientation, shapesIndex;
+
+    constructor Player new() {
+        let position = Array.new(2);
+        do setPosition(0, 0);
+        let shapesIndex = 0;
+        do initializeShapesArray();
+        do setOrientation(0);
+        let shape = Shape.new(shapesArray[shapesIndex]);
+        return this;
+    }
+
+    method void getNewShape() {
+        do setPosition(0, 0);
+        do setOrientation(0);
+        let shapesIndex = shapesIndex + 1;
+        let shape = Shape.new(shapesArray[shapesIndex]);
+        return;
+    }
+
+    method void initializeShapesArray() {
+        let shapesArray = Array.new(5);
+        let shapesArray[0] = 0;
+        let shapesArray[1] = 1;
+        let shapesArray[2] = 2;
+        let shapesArray[3] = 1;
+        let shapesArray[4] = 1;
+        return;
+    }
+
+    method void setPosition(int xPos, int yPos) {
+        let position[0] = xPos;
+        let position[1] = yPos;
+        return;
+    }
+
+    method Array getPosition() {
+        return position;
+    }
+
+    method void setOrientation(int rPos) {
+        let orientation = rPos;
+        return;
+    }
+
+    method int getOrientation() {
+        return orientation;
+    }
+
+    method String getShapeMap(int orientation) {
+        return shape.getShapeMap(orientation);
+    }
+
+    method void setNewShape() {
+        let shapesIndex = shapesIndex + 1;
+        let shape = Shape.new(shapesArray[shapesIndex]);
+        return;
+    }
+}
