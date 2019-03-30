@@ -1,19 +1,19 @@
-function RightHook.new 0
+function Pyramid.new 0
 push constant 3
 call Memory.alloc 1
 pop pointer 0
 push pointer 0
-call RightHook.setDimensions 1
+call Pyramid.setDimensions 1
 pop temp 0
 push pointer 0
-call RightHook.setShapeMapArray 1
+call Pyramid.setShapeMapArray 1
 pop temp 0
 push pointer 0
-call RightHook.setOffsetArray 1
+call Pyramid.setOffsetArray 1
 pop temp 0
 push pointer 0
 return
-function RightHook.setShapeMapArray 0
+function Pyramid.setShapeMapArray 0
 push argument 0
 pop pointer 0
 push constant 4
@@ -26,17 +26,9 @@ push constant 16
 call String.new 1
 push constant 48
 call String.appendChar 2
-push constant 48
-call String.appendChar 2
-push constant 48
-call String.appendChar 2
-push constant 48
-call String.appendChar 2
-push constant 48
-call String.appendChar 2
-push constant 48
-call String.appendChar 2
 push constant 49
+call String.appendChar 2
+push constant 48
 call String.appendChar 2
 push constant 48
 call String.appendChar 2
@@ -45,6 +37,14 @@ call String.appendChar 2
 push constant 49
 call String.appendChar 2
 push constant 49
+call String.appendChar 2
+push constant 48
+call String.appendChar 2
+push constant 48
+call String.appendChar 2
+push constant 48
+call String.appendChar 2
+push constant 48
 call String.appendChar 2
 push constant 48
 call String.appendChar 2
@@ -65,12 +65,6 @@ push this 0
 add
 push constant 16
 call String.new 1
-push constant 49
-call String.appendChar 2
-push constant 48
-call String.appendChar 2
-push constant 48
-call String.appendChar 2
 push constant 48
 call String.appendChar 2
 push constant 49
@@ -82,6 +76,12 @@ call String.appendChar 2
 push constant 48
 call String.appendChar 2
 push constant 49
+call String.appendChar 2
+push constant 49
+call String.appendChar 2
+push constant 48
+call String.appendChar 2
+push constant 48
 call String.appendChar 2
 push constant 49
 call String.appendChar 2
@@ -106,6 +106,14 @@ push this 0
 add
 push constant 16
 call String.new 1
+push constant 48
+call String.appendChar 2
+push constant 48
+call String.appendChar 2
+push constant 48
+call String.appendChar 2
+push constant 48
+call String.appendChar 2
 push constant 49
 call String.appendChar 2
 push constant 49
@@ -114,17 +122,9 @@ push constant 49
 call String.appendChar 2
 push constant 48
 call String.appendChar 2
+push constant 48
+call String.appendChar 2
 push constant 49
-call String.appendChar 2
-push constant 48
-call String.appendChar 2
-push constant 48
-call String.appendChar 2
-push constant 48
-call String.appendChar 2
-push constant 48
-call String.appendChar 2
-push constant 48
 call String.appendChar 2
 push constant 48
 call String.appendChar 2
@@ -151,6 +151,12 @@ push constant 48
 call String.appendChar 2
 push constant 49
 call String.appendChar 2
+push constant 48
+call String.appendChar 2
+push constant 48
+call String.appendChar 2
+push constant 49
+call String.appendChar 2
 push constant 49
 call String.appendChar 2
 push constant 48
@@ -162,12 +168,6 @@ call String.appendChar 2
 push constant 49
 call String.appendChar 2
 push constant 48
-call String.appendChar 2
-push constant 48
-call String.appendChar 2
-push constant 48
-call String.appendChar 2
-push constant 49
 call String.appendChar 2
 push constant 48
 call String.appendChar 2
@@ -185,12 +185,12 @@ push temp 0
 pop that 0
 push constant 0
 return
-function RightHook.getShapeMapArray 0
+function Pyramid.getShapeMapArray 0
 push argument 0
 pop pointer 0
 push this 0
 return
-function RightHook.setDimensions 0
+function Pyramid.setDimensions 0
 push argument 0
 pop pointer 0
 push constant 2
@@ -214,12 +214,12 @@ push temp 0
 pop that 0
 push constant 0
 return
-function RightHook.getDimensions 0
+function Pyramid.getDimensions 0
 push argument 0
 pop pointer 0
 push this 1
 return
-function RightHook.setOffsetArray 0
+function Pyramid.setOffsetArray 0
 push argument 0
 pop pointer 0
 push constant 4
@@ -228,28 +228,12 @@ pop this 2
 push constant 0
 push this 2
 add
-push constant 1
-pop temp 0
-pop pointer 1
-push temp 0
-pop that 0
-push constant 1
-push this 2
-add
 push constant 0
 pop temp 0
 pop pointer 1
 push temp 0
 pop that 0
-push constant 2
-push this 2
-add
-push constant 0
-pop temp 0
-pop pointer 1
-push temp 0
-pop that 0
-push constant 3
+push constant 1
 push this 2
 add
 push constant 10
@@ -257,9 +241,25 @@ pop temp 0
 pop pointer 1
 push temp 0
 pop that 0
+push constant 2
+push this 2
+add
+push constant 1
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 3
+push this 2
+add
+push constant 0
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
 push constant 0
 return
-function RightHook.getOffsetArray 0
+function Pyramid.getOffsetArray 0
 push argument 0
 pop pointer 0
 push this 2

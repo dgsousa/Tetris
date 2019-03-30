@@ -1,7 +1,7 @@
-class LeftHook {
+class Pyramid {
     field Array shapeMapArray, dimensions, offsetArray;
 
-    constructor LeftHook new() {
+    constructor Pyramid new() {
         do setDimensions();
         do setShapeMapArray();
         do setOffsetArray();

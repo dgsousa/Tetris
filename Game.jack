@@ -14,8 +14,7 @@ class Game {
 
     method void initializeShape() {
         let currentShape = Shape.new(shapesArray[shapesIndex]);
-        do initializePosition(2, 2);
-        do setCurrentOrientation(0);
+        do initializePosition(0, 0);
         do draw();
         let shapesIndex = shapesIndex + 1;
         return;
@@ -40,8 +39,8 @@ class Game {
                 let key = Keyboard.keyPressed();
             }
             if (key = 81) { let exit = true; } // q key
-            if (key = 90)  { do updateOrientation(); } // z key
-            if (key = 131) { do move(0, -1); } // up arrow
+            if (key = 90)  { do rotate(); } // z key
+            // if (key = 131) { do move(0, -1); } // up arrow
             if (key = 133) { do move(0, 1); }  // down arrow
             if (key = 130) { do move(-1, 0); } // left arrow
             if (key = 132) { do move(1, 0); }  // right arrow
@@ -59,23 +58,31 @@ class Game {
         let offset = currentShape.getOffset();
         let newX = position[0] + x;
         let newY = position[1] + y;
-        if(
-            (~(newY < (-modulo(offset, 10)))) & // below top
-            (~(newY > ((16 - height) - modulo(offset, 10)))) & // above bottom
-            (~(newX < (-offset/10))) & // left of right edge
-            (~(newX > ((32 - width) - (offset/10)))) // right of left edge
+        if( // Checks to make sure the shape is in bounds
+            (~((newY + modulo(offset, 10)) < 0)) & // below top
+            (~((newY + height + modulo(offset, 10)) > 15)) & // above bottom
+            (~((newX + (offset/10)) < 0)) & // left of right edge
+            (~((newX + width + (offset/10)) > 32)) // right of left edge
         ) {
-            do erase();
-            do setCurrentPosition(newX, newY);
-            do draw();
+            if (~(board.wouldOverlap(currentShape.getShapeMap(), newX, newY))) { // prevents overlapping
+                if(board.isInContactAbove(currentShape.getShapeMap(), newX, newY)) {
+                    do erase();
+                    do board.addShapeToBoard(currentShape.getShapeMap(), newX, newY);
+                    do initializeShape();
+                } else {
+                    do erase();
+                    do setCurrentPosition(newX, newY);
+                    do draw();
+                }
+            }
+        } else {
+            if((newY + height + modulo(offset, 10)) = 16) {
+                do erase();
+                do board.addShapeToBoard(currentShape.getShapeMap(), newX, newY);
+                do initializeShape();
+            }
         }
-        if(newY = ((16 - height) - modulo(offset, 10))) {
-            do erase();
-            do board.addShapeToBoard(currentShape.getShapeMap(), getCurrentPosition());
-
-            do initializeShape();
-        }
-        do Sys.wait(15);
+        do Sys.wait(200);
         return;
     }
 
@@ -95,25 +102,22 @@ class Game {
         return position;
     }
 
-    method void setCurrentOrientation(int zOrientation) {
-        let orientation = orientation;
-        return;
-    }
-
-    method int getCurrentOrientation() {
-        return orientation;
-    }
-
-    method void updateOrientation() {
+    method void rotate() {
+        var String shapeMap;
+        var int newOrientation, currentOrientation;
         if(orientation = 3) {
-            let orientation = 0;
+            let newOrientation = 0;
         } else {
-            let orientation = orientation + 1;
+            let newOrientation = orientation + 1;
         }
-        do erase();
-        do currentShape.setOrientation(orientation);
-        do draw();
-        do Sys.wait(100);
+        let shapeMap = currentShape.getShapeMapByIndex(newOrientation);
+        if(board.canRotate(shapeMap, position)) {
+            do Output.printInt(newOrientation);
+            do erase();
+            do currentShape.setOrientation(newOrientation);
+            do draw();
+            do Sys.wait(200);
+        }
         return;
     }
 

@@ -1,7 +1,7 @@
-class LeftHook {
+class RightSnake {
     field Array shapeMapArray, dimensions, offsetArray;
 
-    constructor LeftHook new() {
+    constructor RightSnake new() {
         do setDimensions();
         do setShapeMapArray();
         do setOffsetArray();

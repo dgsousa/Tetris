@@ -1,5 +1,5 @@
 class Board {
-    field Array occupiedSquares;
+    field Array allSquares;
 
     constructor Board new() {
         do initializeBoard();
@@ -10,15 +10,15 @@ class Board {
         var int counter;
         var Array newRow;
         let counter = 0;
-        let occupiedSquares = Array.new(16);
+        let allSquares = Array.new(16);
         while(counter < 16) {
-            let occupiedSquares[counter] = "00000000000000000000000000000000";
+            let allSquares[counter] = "00000000000000000000000000000000";
             let counter = counter + 1;
         }
         return;
     }
 
-    method void addShapeToBoard(String shapeMap, Array position) {
+    method void addShapeToBoard(String shapeMap, int newX, int newY) {
         var int row, column;
         var char bitChar, isOne;
         let isOne = 49;
@@ -26,7 +26,7 @@ class Board {
             while(column < 4) {
                 let bitChar = shapeMap.charAt(((row * 4) + column));
                 if(bitChar = isOne) {
-                    do updateBoardSquare((position[0] + column), (position[1] + row));
+                    do updateBoardSquare((newX + column), (newY + row));
                 }
                 let column = column + 1;
             }
@@ -40,32 +40,92 @@ class Board {
         var String currentRow;
         var char one;
         let one = 49;
-        let currentRow = occupiedSquares[yPos];
+        let currentRow = allSquares[yPos];
         do currentRow.setCharAt(xPos, one);
-        let occupiedSquares[yPos] = currentRow;
+        let allSquares[yPos] = currentRow;
         do Drawer.drawBox(xPos, yPos, -1);
         return;
     }
 
-    // method void drawBoard() {
-    //     var String currentRow;
-    //     var int row, column;
-    //     var char bitChar, isOne;
-    //     let isOne = 49;
-    //     let row = 0;
-    //     let column = 0;
-    //     while(row < 16) {
-    //         let currentRow = occupiedSquares[row];
-    //         while(column < 32) {
-    //             let bitChar = currentRow.charAt(column);
-    //             if(bitChar = isOne) {
-    //                 do Drawer.drawBox(column, row, -1);
-    //             }
-    //             let column = column + 1;
-    //         }
-    //         let column = 0;
-    //         let row = row + 1;
-    //     }
-    //     return;
-    // }
+    method Boolean isInContactAbove(String shapeMap, int newX, int newY) {
+        var int row, column;
+        var String boardRow;
+        var char bitChar, boardChar, isOne;
+        let isOne = 49;
+        while(row < 4) {
+            while(column < 4) {
+                let bitChar = shapeMap.charAt(((row * 4) + column));
+                if(bitChar = isOne) {
+                    if((row + newY) < 15) {
+                        let boardRow = allSquares[(newY + row + 1)];
+                        let boardChar = boardRow.charAt(newX + column);
+                        if(boardChar = isOne) {
+                            return true;
+                        }
+                    }
+                }
+                let column = column + 1;
+            }
+            let column = 0;
+            let row = row + 1;
+        }
+        return false;
+    }
+
+    method Boolean wouldOverlap(String shapeMap, int newX, int newY) {
+        var int row, column;
+        var String boardRow;
+        var char bitChar, boardChar, isOne;
+        let isOne = 49;
+        while(row < 4) {
+            while(column < 4) {
+                let bitChar = shapeMap.charAt(((row * 4) + column));
+                if(bitChar = isOne) {
+                    let boardRow = allSquares[(newY + row)];
+                    let boardChar = boardRow.charAt(newX + column);
+                    if(boardChar = isOne) {
+                        return true;
+                    }
+                }
+                let column = column + 1;
+            }
+            let column = 0;
+            let row = row + 1;
+        }
+        return false;
+    }
+
+    method Boolean isInBounds(int x, int y) {
+        do Output.printString("test4");
+        return ((~(x < 0)) & (~(x > 15)) & (~(y < 0)) & (~(y > 32)));
+    }
+
+    method Boolean canRotate(String shapeMap, Array position) {
+        var int xPos, yPos, row, column;
+        var String boardRow;
+        var char bitChar, boardChar, isOne;
+        let xPos = position[0];
+        let yPos = position[1];
+        let isOne = 49;
+        do Output.printString("test1");
+        while(row < 4) {
+            while(column < 4) {
+                let bitChar = shapeMap.charAt(((row * 4) + column));
+                if(bitChar = isOne) {
+                    do Output.printString("test2");
+                    let boardRow = allSquares[(yPos + row)];
+                    let boardChar = boardRow.charAt(xPos + column);
+                    if((~isInBounds((xPos + column), (yPos + row))) | boardChar = isOne) {
+                        do Output.printString("test3");
+                        return false;
+                    }
+                }
+                let column = column + 1;
+            }
+            let column = 0;
+            let row = row + 1;
+        }
+        do Output.printString("test5");
+        return true;
+    }
 }

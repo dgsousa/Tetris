@@ -2,29 +2,23 @@ class Shape {
     field Square square;
     field Long long;
     field RightHook rightHook;
-    field Array shapeMapArray, dimensionsArray, offsetArray, currentDimensions;
+    field Array shapeMapArray, dimensionsArray;
     field String currentShapeMap;
-    field int currentOffset;
+    field int orientation;
 
     constructor Shape new(int shapeIndex) {
         do initializeFields();
         if(shapeIndex = 0) {
             let square = Square.new();
             let shapeMapArray = square.getShapeMapArray();
-            let dimensionsArray = square.getDimensions();
-            let offsetArray = square.getOffsetArray();
         }
         if(shapeIndex = 1) {
             let long = Long.new();
             let shapeMapArray = long.getShapeMapArray();
-            let dimensionsArray = long.getDimensions();
-            let offsetArray = long.getOffsetArray();
         }
         if(shapeIndex = 2) {
             let rightHook = RightHook.new();
             let shapeMapArray = rightHook.getShapeMapArray();
-            let dimensionsArray = rightHook.getDimensions();
-            let offsetArray = rightHook.getOffsetArray();
         }
         do setOrientation(0);
         return this;
@@ -49,19 +43,11 @@ class Shape {
         return;
     }
 
-    method int getWidth() {
-        return currentDimensions[0];
-    }
-
-    method int getHeight() {
-        return currentDimensions[1];
-    }
-
     method String getShapeMap() {
         return currentShapeMap;
     }
 
-    method Array getOffset() {
-        return currentOffset;
+    method Array getShapeMapByIndex(int index) {
+        return shapeMapArray[index];
     }
 }
