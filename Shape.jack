@@ -18,7 +18,7 @@ class Shape {
             let shapeMapArray = getRightSnake();
         }
         if(shapeIndex = 5) {
-            let shapeMapArray = getRightHook);
+            let shapeMapArray = getRightHook();
         }
         if(shapeIndex = 6) {
             let shapeMapArray = getPyramid();
@@ -32,64 +32,71 @@ class Shape {
 
     method Array getSquare() {
         var Array shapeArray;
-        let shapeMapArray[0] = "0000011001100000";
-        let shapeMapArray[1] = "0000011001100000";
-        let shapeMapArray[2] = "0000011001100000";
-        let shapeMapArray[3] = "0000011001100000";
+        let shapeArray = Array.new(4);
+        let shapeArray[0] = "0000011001100000";
+        let shapeArray[1] = "0000011001100000";
+        let shapeArray[2] = "0000011001100000";
+        let shapeArray[3] = "0000011001100000";
         return shapeArray;
     }
 
     method Array getLong() {
         var Array shapeArray;
-        let shapeMapArray[0] = "0100010001000100";
-        let shapeMapArray[1] = "0000111100000000";
-        let shapeMapArray[2] = "0100010001000100";
-        let shapeMapArray[3] = "0000111100000000";
+        let shapeArray = Array.new(4);
+        let shapeArray[0] = "0100010001000100";
+        let shapeArray[1] = "0000111100000000";
+        let shapeArray[2] = "0100010001000100";
+        let shapeArray[3] = "0000111100000000";
         return shapeArray;
     }
 
     method Array getLeftSnake() {
         var Array shapeArray;
-        let shapeMapArray[0] = "0000110001100000";
-        let shapeMapArray[1] = "0010011001000000";
-        let shapeMapArray[2] = "0000110001100000";
-        let shapeMapArray[3] = "0010011001000000";
+        let shapeArray = Array.new(4);
+        let shapeArray[0] = "0000110001100000";
+        let shapeArray[1] = "0010011001000000";
+        let shapeArray[2] = "0000110001100000";
+        let shapeArray[3] = "0010011001000000";
         return shapeArray;
     }
 
     method Array getLeftHook() {
         var Array shapeArray;
-        let shapeMapArray[0] = "0000100011100000";
-        let shapeMapArray[1] = "1100100010000000";
-        let shapeMapArray[2] = "1110001000000000";
-        let shapeMapArray[3] = "0010001001100000";
+        let shapeArray = Array.new(4);
+        let shapeArray[0] = "0000100011100000";
+        let shapeArray[1] = "1100100010000000";
+        let shapeArray[2] = "1110001000000000";
+        let shapeArray[3] = "0010001001100000";
         return shapeArray;
     }
 
     method Array getRightSnake() {
         var Array shapeArray;
-        let shapeMapArray[0] = "0000011011000000";
-        let shapeMapArray[1] = "0100011000100000";
-        let shapeMapArray[2] = "0000011011000000";
-        let shapeMapArray[3] = "0100011000100000";
+        let shapeArray = Array.new(4);
+        let shapeArray[0] = "0000011011000000";
+        let shapeArray[1] = "0100011000100000";
+        let shapeArray[2] = "0000011011000000";
+        let shapeArray[3] = "0100011000100000";
         return shapeArray;
     }
 
     method Array getRightHook() {
         var Array shapeArray;
-        let shapeMapArray[0] = "0000001011100000";
-        let shapeMapArray[1] = "1000100011000000";
-        let shapeMapArray[2] = "1110100000000000";
-        let shapeMapArray[3] = "0110001000100000";
+        let shapeArray = Array.new(4);
+        let shapeArray[0] = "0000001011100000";
+        let shapeArray[1] = "1000100011000000";
+        let shapeArray[2] = "1110100000000000";
+        let shapeArray[3] = "0110001000100000";
         return shapeArray;
     }
 
     method Array getPyramid() {
         var Array shapeArray;
-        let shapeMapArray[0] = "0100111000000000";
-        let shapeMapArray[1] = "0100011001000000";
-        let shapeMapArray[2] = "0000111001000000";
-        let shapeMapArray[3] = "0100110001000000";
+        let shapeArray = Array.new(4);
+        let shapeArray[0] = "0100111000000000";
+        let shapeArray[1] = "0100011001000000";
+        let shapeArray[2] = "0000111001000000";
+        let shapeArray[3] = "0100110001000000";
         return shapeArray;
     }
 }
