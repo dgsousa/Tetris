@@ -195,4 +195,18 @@ class Board {
         }
         return;
     }
+
+    method void dispose() {
+        var int counter;
+        var String boardRow;
+        let counter = 0;
+        while(counter < 16) {
+            let boardRow = allSquares[counter];
+            do boardRow.dispose();
+            let counter = counter + 1;
+        }
+        do Array.dispose(allSquares);
+        do Memory.deAlloc(this);
+        return;
+    }
 }

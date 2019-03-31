@@ -124,4 +124,11 @@ class Game {
         do draw();
         return;
     }
+
+    method void dispose() {
+        do board.dispose();
+        do player.dispose();
+        do Memory.deAlloc(this);
+        return;
+    }
 }

@@ -1,12 +1,11 @@
-// Shape mapping
-// 0 -> Square
-// 1 -> Long
 
 class Main {
     function void main() {
         var Game game;
         let game = Game.new();
         do game.run();
+        do game.dispose();
+        do Screen.clearScreen();
         return;
     }
 }

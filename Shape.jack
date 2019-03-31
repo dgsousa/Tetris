@@ -90,4 +90,10 @@ class Shape {
         let shapeMapArray[3] = "0100110001000000";
         return;
     }
+
+    method void dispose() {
+        do Array.dispose(shapeMapArray);
+        do Memory.deAlloc(this);
+        return;
+    }
 }

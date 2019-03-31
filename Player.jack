@@ -108,4 +108,12 @@ class Player {
         do shape.setShape(shapesArray[shapesIndex]);
         return;
     }
+
+    method void dispose() {
+        do shape.dispose();
+        do Array.dispose(position);
+        do Array.dispose(shapesArray);
+        do Memory.deAlloc(this);
+        return;
+    }
 }
