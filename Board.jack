@@ -17,6 +17,7 @@ class Board {
             let allSquares[counter] = "00000000000000000000000000000000";
             let counter = counter + 1;
         }
+        let allSquares[15] = "11111111111111111111111111111111";
         return;
     }
 
@@ -34,6 +35,34 @@ class Board {
             let column = 0;
             let row = row + 1;
         }
+        do removeCompleteRows();
+        do drawBoard();
+        return;
+    }
+
+    method void drawBoard() {
+        var int row;
+        let row = 0;
+        while(row < 16) {
+            do drawBoardRow(row);
+            let row = row + 1;
+        }
+        return;
+    }
+
+    method void drawBoardRow(int row) {
+        var int column;
+        var String boardRow;
+        let column = 0;
+        let boardRow = allSquares[row];
+        while(column < 32) {
+            if(boardRow.charAt(column) = isOne) {
+                do Drawer.drawBox(column, row, -1);
+            } else {
+                do Drawer.drawBox(column, row, 0);
+            }
+            let column = column + 1;
+        }
         return;
     }
 
@@ -44,7 +73,6 @@ class Board {
         let currentRow = allSquares[yPos];
         do currentRow.setCharAt(xPos, one);
         let allSquares[yPos] = currentRow;
-        do Drawer.drawBox(xPos, yPos, -1);
         return;
     }
 
@@ -118,5 +146,53 @@ class Board {
             let row = row + 1;
         }
         return false;
+    }
+
+    method void removeCompleteRows() {
+        var int counter;
+        var String boardRow;
+        let counter = 0;
+        while(counter < 16) {
+            let boardRow = allSquares[counter];
+            if(isCompleteRow(boardRow)) {
+                do removeRow(counter);
+            }
+            let counter = counter + 1;
+        }
+        return;
+    }
+
+    method Bool isCompleteRow(String boardRow) {
+        var int counter;
+        var char bitChar;
+        let counter = 0;
+        while(counter < 32) {
+            let bitChar = boardRow.charAt(counter);
+            if(~(bitChar = isOne)) {
+                return false;
+            }
+            let counter = counter + 1;
+        }
+        return true;
+    }
+
+    method void removeRow(int row) {
+        var int counter;
+        let counter = row;
+        while(counter > 0) {
+            let allSquares[counter] = allSquares[counter - 1];
+            let counter = counter - 1;
+        }
+        let allSquares[0] = "00000000000000000000000000000000";
+        return;
+    }
+
+    method void clearScreen() {
+        var int counter;
+        while(counter < 16) {
+            let allSquares[counter] = "00000000000000000000000000000000";
+            let counter = counter + 1;
+        }
+        return;
     }
 }

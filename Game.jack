@@ -10,7 +10,16 @@ class Game {
     }
 
     method void draw() {
-        do Drawer.drawShape(getShapeMap(), getPosition());
+        var String shapeMap;
+        var Array position;
+        let shapeMap = getShapeMap();
+        let position = getPosition();
+        if(board.spaceIsFree(shapeMap, position[0], position[1])) {
+            do Drawer.drawShape(shapeMap, position);
+        } else {
+            do board.clearScreen();
+            do Output.printString("You Lose!");
+        }
         return;
     }
 
@@ -63,7 +72,7 @@ class Game {
                 do setNewShape();
             }
         }
-        do Sys.wait(200);
+        do Sys.wait(50);
         return;
     }
 
